@@ -5,14 +5,14 @@ services:
     environment:
       - INFLUXDB_DB=energy
     ports:
-      - "8086:8086"
+      - "8087:8087"
     restart: unless-stopped
     volumes:
        - ./influxdb:/var/lib/influxdb
   grafana:
     image: grafana/grafana:8.2.3
     ports:
-      - "3000:3000"
+      - "3001:3001"
     volumes:
       - ./grafana-config:/etc/grafana/provisioning
       - ./grafana-dashboards:/var/lib/grafana/dashboards
