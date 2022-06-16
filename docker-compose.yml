@@ -5,10 +5,12 @@ services:
     environment:
       - INFLUXDB_DB=energy
     ports:
-      - "8086:8086"
+      - "12380:8086"
     restart: unless-stopped
     volumes:
        - ./influxdb:/var/lib/influxdb
+    networks:
+      - octograph
   grafana:
     image: grafana/grafana:8.2.3
     environment:
@@ -25,6 +27,8 @@ services:
     volumes:
       - ./grafana-config:/etc/grafana/provisioning
       - ./grafana-dashboards:/var/lib/grafana/dashboards
+    networks:
+      - octograph
     depends_on:
       - influxdb
     restart: unless-stopped
