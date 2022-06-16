@@ -4,7 +4,7 @@ RUN apk update && \
     apk add --update git
 
 FROM python:3-alpine3.12
-RUN apt-get install python3-dev
+RUN apt-get update && apt-get install build-essential -y
 RUN pip3 install requests 
 RUN pip3 install influxdb 
 RUN pip3 install click
