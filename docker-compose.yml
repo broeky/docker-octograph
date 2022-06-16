@@ -1,6 +1,6 @@
 version: '3'
 services:
-  influxdb-2:
+  influxdb:
     image: influxdb:1.8
     environment:
       - INFLUXDB_DB=energy
