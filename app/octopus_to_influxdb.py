@@ -223,16 +223,26 @@ def cmd(config_file, from_date, to_date):
         api_key, e_url, from_iso, to_iso
     )
     click.echo(f' {len(e_consumption)} readings.')
-    click.echo(
-        f'Retrieving Agile rates for {from_iso} until {to_iso}...',
-        nl=False
-    )
-    rate_data['electricity']['agile_unit_rates'] = retrieve_paginated_data(
-        api_key, agile_url, from_iso, to_iso
-    )
-    click.echo(f' {len(rate_data["electricity"]["agile_unit_rates"])} rates.')
+#    click.echo(
+#        f'Retrieving Agile rates for {from_iso} until {to_iso}...',
+#        nl=False
+#    )
+#    rate_data['electricity']['agile_unit_rates'] = retrieve_paginated_data(
+#        api_key, agile_url, from_iso, to_iso
+#    )
+#    click.echo(f' {len(rate_data["electricity"]["agile_unit_rates"])} rates.')
     store_series(influx, 'electricity', e_consumption, rate_data['electricity'])
 
+    click.echo(
+        f'Retrieving garage  data for {from_iso} until {to_iso}...',
+        nl=False
+    )
+    eg_consumption = retrieve_paginated_data(
+        api_key, eg_url, from_iso, to_iso
+    )
+    click.echo(f' {len(eg_consumption)} readings.')
+    store_series(influx, 'garage', eg_consumption, rate_data['garage'])
+               
     click.echo(
         f'Retrieving gas data for {from_iso} until {to_iso}...',
         nl=False
