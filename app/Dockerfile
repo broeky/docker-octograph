@@ -2,7 +2,7 @@ FROM alpine:3.12 as gitty
 LABEL stage=gitty
 RUN apk update && \
     apk add --update git && \
-    apk add --update build-essential -y
+    apk add --update build-essential
 
 FROM python:3-alpine3.12
 
