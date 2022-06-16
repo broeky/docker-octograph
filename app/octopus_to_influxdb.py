@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from configparser import ConfigParser
 from urllib import parse
@@ -137,6 +137,7 @@ def cmd(config_file, from_date, to_date):
         password=config.get('influxdb', 'password', fallback=""),
         database=config.get('influxdb', 'database', fallback="energy"),
     )
+# House Meter
 
     api_key = config.get('octopus', 'api_key')
     if not api_key:
@@ -145,11 +146,27 @@ def cmd(config_file, from_date, to_date):
     e_mpan = config.get('electricity', 'mpan', fallback=None)
     e_serial = config.get('electricity', 'serial_number', fallback=None)
     if not e_mpan or not e_serial:
-        raise click.ClickException('No electricity meter identifiers')
+        raise click.ClickException('No electricity home meter identifiers')
     e_url = 'https://api.octopus.energy/v1/electricity-meter-points/' \
             f'{e_mpan}/meters/{e_serial}/consumption/'
     agile_url = config.get('electricity', 'agile_rate_url', fallback=None)
 
+# Garage Meter
+
+    api_key = config.get('octopus', 'api_key')
+    if not api_key:
+        raise click.ClickException('No Octopus API key set')
+
+    eg_mpan = config.get('garage', 'mpan', fallback=None)
+    eg_serial = config.get('garage', 'serial_number', fallback=None)
+    if not eg_mpan or not eg_serial:
+        raise click.ClickException('No electricity garage  meter identifiers')
+    eg_url = 'https://api.octopus.energy/v1/electricity-meter-points/' \
+            f'{eg_mpan}/meters/{eg_serial}/consumption/'
+    agile_url = config.get('garage', 'agile_rate_url', fallback=None)
+
+# Gas Meter
+        
     g_mpan = config.get('gas', 'mpan', fallback=None)
     g_serial = config.get('gas', 'serial_number', fallback=None)
     g_meter_type = config.get('gas', 'meter_type', fallback=1)
