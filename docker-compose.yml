@@ -32,6 +32,15 @@ services:
     depends_on:
       - influxdb
     restart: unless-stopped
+ octograph:
+    image: octograph:latest
+    networks: 
+      - octograph
+    depends on:
+      - influxdb
+    links:
+      - influxdb
+    restart: unless-stopped  
 networks:
   octograph:
 volumes:
