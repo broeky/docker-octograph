@@ -32,7 +32,7 @@ services:
     depends_on:
       - influxdb
     restart: unless-stopped
- octograph:
+  octograph:
     image: octograph:latest
     networks: 
       - octograph
