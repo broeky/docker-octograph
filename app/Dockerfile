@@ -1,14 +1,12 @@
-FROM alpine:3.12 as gitty
-LABEL stage=gitty
-RUN apk update && \
-    apk add --update git && \
-    apk add --update build-essential
-
 FROM python:3-alpine3.12
 
-RUN pip3 install requests 
-RUN pip3 install influxdb 
-RUN pip3 install click
-RUN pip3 install maya
+RUN apk --update add gcc build-base freetype-dev libpng-dev openblas-dev
+
+RUN pip install --upgrade pip
+
+RUN pip3 install --no-cache-dir requests
+RUN pip3 install --no-cache-dir influxdb
+RUN pip3 install --no-cache-dir click
+RUN pip3 install --no-cache-dir maya
 COPY octopus_to_influxdb.py ./
-ENTRYPOINT [ "python", "./octopus_to_influxdb.py" ]
+ENTRYPOINT [ "python3", "./octopus_to_influxdb.py" ]
