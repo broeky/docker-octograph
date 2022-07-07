@@ -202,6 +202,28 @@ def cmd(config_file, from_date, to_date):
             ),
             'agile_unit_rates': [],
         },
+        'garage': {
+            'standing_charge': config.getfloat(
+                'garage', 'standing_charge', fallback=0.0
+            ),
+            'unit_rate_high': config.getfloat(
+                'garage', 'unit_rate_high', fallback=0.0
+            ),
+            'unit_rate_low': config.getfloat(
+                'garage', 'unit_rate_low', fallback=0.0
+            ),
+            'unit_rate_low_start': config.get(
+                'garage', 'unit_rate_low_start', fallback="00:00"
+            ),
+            'unit_rate_low_end': config.get(
+                'garage', 'unit_rate_low_end', fallback="00:00"
+            ),
+            'unit_rate_low_zone': timezone,
+            'agile_standing_charge': config.getfloat(
+                'gargage', 'agile_standing_charge', fallback=0.0
+            ),
+            'agile_unit_rates': [],
+        },    
         'gas': {
             'standing_charge': config.getfloat(
                 'gas', 'standing_charge', fallback=0.0
