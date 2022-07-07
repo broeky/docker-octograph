@@ -1,48 +1,10 @@
 version: '3'
 services:
-  influxdb:
-    image: influxdb:1.8
-    environment:
-      - INFLUXDB_DB=energy
-    ports:
-      - "12380:8086"
-    restart: unless-stopped
-    volumes:
-       - ./influxdb:/var/lib/influxdb
-    networks:
-      - octograph
-  grafana:
-    image: grafana/grafana:8.2.3
-    environment:
-      - GF_SERVER_ENABLE_GZIP=true
-      - GF_ANALYTICS_CHECK_FOR_UPDATES=false
-      - GF_ANALYTICS_REPORTING_ENABLED=false
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-      - GF_AUTH_ANONYMOUS_ORG_NAME=Main Org.
-      - GF_INSTALL_PLUGINS=vonage-status-panel
-      - GF_SERVER_HTTP_PORT=3000
-    ports:
-      - "3001:3000"
-    volumes:
-      - ./grafana-config:/etc/grafana/provisioning
-      - ./grafana-dashboards:/var/lib/grafana/dashboards
-    networks:
-      - octograph
-    depends_on:
-      - influxdb
-    restart: unless-stopped
   octograph:
     image: octograph:latest
+    container_name: octograph
     networks: 
       - octograph
-    depends_on:
-      - influxdb
-    links:
-      - influxdb
     restart: unless-stopped  
 networks:
   octograph:
-volumes:
-  influxdb:
-  grafana-storage:
