@@ -216,6 +216,10 @@ def cmd(config_file, from_date, to_date):
     to_iso = maya.when(to_date, timezone=timezone).iso8601()
 
     click.echo(
+        f'Starting    {from_date}'
+    )
+
+    click.echo(
         f'Retrieving electricity data for {from_iso} until {to_iso}...',
         nl=False
     )
