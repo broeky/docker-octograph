@@ -8,5 +8,9 @@ RUN pip3 install --no-cache-dir requests
 RUN pip3 install --no-cache-dir influxdb
 RUN pip3 install --no-cache-dir click
 RUN pip3 install --no-cache-dir maya
+
+COPY octograph.ini ./
 COPY octopus_to_influxdb.py ./
+
+
 ENTRYPOINT [ "python3", "./octopus_to_influxdb.py" ]
