@@ -251,7 +251,7 @@ def cmd(config_file, from_date, to_date):
     click.echo(f' {len(e_consumption)} readings.')
     if {len(e_consumption)} < 48:
         click.echo(f' bad data read for {from_iso} ...')
-    elif     
+    else:    
         store_series(influx, 'electricity', e_consumption, rate_data['electricity'])
 
 #    click.echo(
@@ -274,7 +274,7 @@ def cmd(config_file, from_date, to_date):
     click.echo(f' {len(eg_consumption)} readings.')
     if {len(eg_consumption)} < 48:
         click.echo(f' bad data read for {from_iso} ...')
-    elif     
+    else:     
         store_series(influx, 'garage', eg_consumption, rate_data['garage'])
                
     click.echo(
@@ -287,7 +287,7 @@ def cmd(config_file, from_date, to_date):
     click.echo(f' {len(g_consumption)} readings.')    
     if {len(g_consumption)} < 48:
         click.echo(f' bad data read for {from_iso} ...')
-    elif     
+    else:    
         store_series(influx, 'gas', g_consumption, rate_data['gas'])
 
     
