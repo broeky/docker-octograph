@@ -291,7 +291,7 @@ def cmd(config_file, from_date, to_date):
         store_series(influx, 'gas', g_consumption, rate_data['gas'])
 
     
-    healthchecks = https://hc-ping.com/4d4d4235-faae-4f5b-88de-bc0daccc6978
+    healthchecks = 'https://hc-ping.com/4d4d4235-faae-4f5b-88de-bc0daccc6978'
     click.echo(f' pinging health check')
     requests.get(healthchecks)
     
