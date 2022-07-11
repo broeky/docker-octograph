@@ -249,7 +249,8 @@ def cmd(config_file, from_date, to_date):
         api_key, e_url, from_iso, to_iso
     )
     click.echo(f' {len(e_consumption)} readings.')
-    if int({len(e_consumption)}) < 48:
+    number_measurements = len(e_consumption)
+    if number_measurements < 48:
         click.echo(f' bad data read for {from_iso} ...')
     else:    
         store_series(influx, 'electricity', e_consumption, rate_data['electricity'])
@@ -272,7 +273,8 @@ def cmd(config_file, from_date, to_date):
         api_key, eg_url, from_iso, to_iso
     )
     click.echo(f' {len(eg_consumption)} readings.')
-    if int({len(eg_consumption)}) < 48:
+    number_measurements = len(eg_consumption)
+    if number_measurements < 48:
         click.echo(f' bad data read for {from_iso} ...')
     else:     
         store_series(influx, 'garage', eg_consumption, rate_data['garage'])
@@ -285,7 +287,8 @@ def cmd(config_file, from_date, to_date):
         api_key, g_url, from_iso, to_iso
     )
     click.echo(f' {len(g_consumption)} readings.')    
-    if int({len(g_consumption)}) < 48:
+    number_measurements = len(g_consumption)
+    if number_measurements < 48:
         click.echo(f' bad data read for {from_iso} ...')
     else:    
         store_series(influx, 'gas', g_consumption, rate_data['gas'])
