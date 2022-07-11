@@ -238,7 +238,7 @@ def cmd(config_file, from_date, to_date):
     to_iso = maya.when(to_date, timezone=timezone).iso8601()
 
     click.echo(
-        f'Starting    {from_date}'
+        f'Starting    {from_date}  timezone:   {timezone}'
     )
 
     click.echo(
@@ -249,6 +249,11 @@ def cmd(config_file, from_date, to_date):
         api_key, e_url, from_iso, to_iso
     )
     click.echo(f' {len(e_consumption)} readings.')
+    if {len(e_consumption)} < 48
+        click.echo(f' bad data read for {from_iso} ...')
+    elif     
+        store_series(influx, 'electricity', e_consumption, rate_data['electricity'])
+
 #    click.echo(
 #        f'Retrieving Agile rates for {from_iso} until {to_iso}...',
 #        nl=False
@@ -257,7 +262,7 @@ def cmd(config_file, from_date, to_date):
 #        api_key, agile_url, from_iso, to_iso
 #    )
 #    click.echo(f' {len(rate_data["electricity"]["agile_unit_rates"])} rates.')
-    store_series(influx, 'electricity', e_consumption, rate_data['electricity'])
+
 
     click.echo(
         f'Retrieving garage  data for {from_iso} until {to_iso}...',
@@ -267,7 +272,10 @@ def cmd(config_file, from_date, to_date):
         api_key, eg_url, from_iso, to_iso
     )
     click.echo(f' {len(eg_consumption)} readings.')
-    store_series(influx, 'garage', eg_consumption, rate_data['garage'])
+    if {len(eg_consumption)} < 48
+        click.echo(f' bad data read for {from_iso} ...')
+    elif     
+        store_series(influx, 'garage', eg_consumption, rate_data['garage'])
                
     click.echo(
         f'Retrieving gas data for {from_iso} until {to_iso}...',
@@ -276,8 +284,17 @@ def cmd(config_file, from_date, to_date):
     g_consumption = retrieve_paginated_data(
         api_key, g_url, from_iso, to_iso
     )
-    click.echo(f' {len(g_consumption)} readings.')
-    store_series(influx, 'gas', g_consumption, rate_data['gas'])
+    click.echo(f' {len(g_consumption)} readings.')    
+    if {len(g_consumption)} < 48
+        click.echo(f' bad data read for {from_iso} ...')
+    elif     
+        store_series(influx, 'gas', g_consumption, rate_data['gas'])
+
+    
+    healthchecks = https://hc-ping.com/4d4d4235-faae-4f5b-88de-bc0daccc6978
+    click.echo(f' pinging health check')
+    requests.get(healthchecks)
+    
 
 
 if __name__ == '__main__':
