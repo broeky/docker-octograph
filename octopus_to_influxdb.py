@@ -80,6 +80,7 @@ def store_series(connection, series, metrics, rate_data):
         standing_charge = rate_data['standing_charge'] / 48  # 30 minute reads
         fields = {
             'consumption': consumption,
+            'rate_cost' : rate_cost ,
             'cost': cost,
             'total_cost': cost + standing_charge,
         }
