@@ -114,6 +114,7 @@ def store_series(connection, series, metrics, rate_data):
         }
         for measurement in metrics
     ]
+    click.echo(f' write points {measurements} ...')
     connection.write_points(measurements)
 
 
