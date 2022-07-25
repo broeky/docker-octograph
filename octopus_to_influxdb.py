@@ -81,6 +81,7 @@ def store_series(connection, series, metrics, rate_data):
         fields = {
             'consumption': consumption,
             'rate_cost' : rate_cost ,
+            'standing_charge_per_48' : standing_charge ,
             'cost': cost,
             'total_cost': cost + standing_charge,
         }
@@ -115,7 +116,6 @@ def store_series(connection, series, metrics, rate_data):
         }
         for measurement in metrics
     ]
-    click.echo(f' write points {measurements} ...')
     connection.write_points(measurements)
 
 
